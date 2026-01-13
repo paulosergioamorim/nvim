@@ -5,6 +5,8 @@ vim.o.relativenumber = true
 vim.o.signcolumn = "yes"
 vim.o.winborder = "single"
 vim.o.mouse = "a"
+vim.o.wrap = false
+vim.o.guicursor = "a:block"
 
 vim.schedule(function()
     vim.o.clipboard = 'unnamedplus'
@@ -52,6 +54,41 @@ vim.opt.rtp:prepend(lazypath)
 local opts = {}
 local plugins = {
     { "neovim/nvim-lspconfig" },
+    {
+        "nvim-treesitter/nvim-treesitter",
+        lazy = false,
+        build = ":TSUpdate"
+    },
+    {
+        "folke/which-key.nvim",
+        event = "VimEnter",
+        opts = {},
+        keys = {
+            {
+                "<leader>?",
+                function()
+                    require("which-key").show({ global = false })
+                end,
+                desc = "Buffer Local Keymaps (which-key)",
+            },
+        },
+    },
+    {
+        'lewis6991/gitsigns.nvim',
+        opts = {
+            signs = {
+                add = { text = '+' },
+                change = { text = '~' },
+                delete = { text = '_' },
+                topdelete = { text = '‾' },
+                changedelete = { text = '~' },
+            },
+        },
+    },
+    {
+        "j-hui/fidget.nvim",
+        opts = {}
+    },
     {
         "vague-theme/vague.nvim",
         lazy = false,    -- make sure we load this during startup if it is your main colorscheme
@@ -240,4 +277,23 @@ vim.api.nvim_create_autocmd("LspAttach", {
     end,
 })
 
-vim.lsp.enable({ "lua_ls", "clangd", "ts_ls" })
+local servers = { "lua_ls", "clangd", "ts_ls" }
+
+vim.lsp.enable(servers)
+
+local grammars = { "c", "make", "bash" }
+
+require("nvim-treesitter").install(grammars)
+
+vim.api.nvim_create_autocmd('FileType', {
+    pattern = grammars,
+    callback = function()
+        -- syntax highlighting, provided by Neovim
+        vim.treesitter.start()
+        -- folds, provided by Neovim
+        -- vim.wo.foldexpr = 'v:lua.vim.treesitter.foldexpr()'
+        -- vim.wo.foldmethod = 'expr'
+        -- indentation, provided by nvim-treesitter
+        vim.bo.indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
+    end,
+})
