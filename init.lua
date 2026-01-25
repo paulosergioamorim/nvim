@@ -180,14 +180,19 @@ local servers = { "lua_ls", "clangd", "ts_ls" }
 
 vim.lsp.enable(servers)
 
-local grammars = { "c", "make", "bash" }
+local grammars = { "c", "make", "bash", "json", "html", "tsx", "typescript", "css", "sway", "hyprlang" }
+local extra_ft = { "jsonc", "swayconfig" }
+local all_patterns = vim.list_extend(vim.deepcopy(grammars), extra_ft)
 
 require("nvim-treesitter").install(grammars)
 
+vim.treesitter.language.register("json", "jsonc")
+vim.treesitter.language.register("sway", "swayconfig")
+
 vim.api.nvim_create_autocmd("FileType", {
-    pattern = grammars,
-    callback = function()
-        vim.treesitter.start()
-        vim.bo.indentexpr = "v:lua.require\"nvim-treesitter\".indentexpr()"
+    pattern = all_patterns,
+    callback = function(args)
+        vim.treesitter.start(args.buf)
+        vim.bo[args.buf].indentexpr = "v:lua.require\"nvim-treesitter\".indentexpr()"
     end,
 })
