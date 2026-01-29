@@ -176,11 +176,13 @@ vim.api.nvim_create_autocmd("LspAttach", {
     end,
 })
 
-local servers = { "lua_ls", "clangd", "ts_ls" }
+local servers = { "lua_ls", "clangd", "ts_ls", "pyright" }
 
 vim.lsp.enable(servers)
 
-local grammars = { "c", "make", "bash", "json", "html", "tsx", "typescript", "css", "sway", "hyprlang" }
+local grammars = {
+    "c", "make", "bash", "json", "html", "tsx", "typescript", "prisma", "css", "sway", "hyprlang", "python"
+}
 local extra_ft = { "jsonc", "swayconfig" }
 local all_patterns = vim.list_extend(vim.deepcopy(grammars), extra_ft)
 
