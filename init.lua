@@ -5,7 +5,7 @@ vim.o.relativenumber = true
 vim.o.signcolumn = "yes"
 vim.o.winborder = "single"
 vim.o.mouse = "a"
-vim.o.wrap = false
+vim.o.wrap = true
 vim.o.guicursor = "a:block"
 
 vim.schedule(function()
