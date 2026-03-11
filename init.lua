@@ -181,7 +181,7 @@ local servers = { "lua_ls", "clangd", "ts_ls", "pyright" }
 vim.lsp.enable(servers)
 
 local grammars = {
-    "c", "make", "bash", "html", "tsx", "typescript", "css", "python", "markdown"
+    "c", "make", "bash", "html", "tsx", "typescript", "css", "python", "markdown", "haskell"
 }
 
 require("nvim-treesitter").install(grammars)
