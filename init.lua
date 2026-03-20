@@ -180,17 +180,17 @@ local servers = { "lua_ls", "clangd", "ts_ls", "pyright" }
 
 vim.lsp.enable(servers)
 
-local grammars = {
-    "c", "make", "bash", "html", "tsx", "typescript", "css", "python", "markdown", "haskell"
-}
+local grammars = { "c", "make", "bash", "html", "tsx", "typescript", "css", "python", "haskell", "xml", "markdown" }
 
 require("nvim-treesitter").install(grammars)
 
 vim.api.nvim_create_autocmd("FileType", {
-    pattern = grammars,
+    pattern = { "*" },
     callback = function(args)
-        vim.treesitter.start(args.buf)
-        vim.bo[args.buf].indentexpr = "v:lua.require\"nvim-treesitter\".indentexpr()"
+        local lang = vim.treesitter.language.get_lang(args.match)
+        if lang and vim.treesitter.language.add(lang) then
+            vim.treesitter.start(args.buf)
+        end
     end,
 })
 
