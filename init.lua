@@ -176,7 +176,7 @@ vim.api.nvim_create_autocmd("LspAttach", {
     end,
 })
 
-local servers = { "lua_ls", "clangd", "ts_ls", "pyright" }
+local servers = { "lua_ls", "clangd", "ts_ls", "pyright", "roslyn_ls", "jdtls" }
 
 vim.lsp.enable(servers)
 
