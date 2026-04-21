@@ -1,3 +1,10 @@
+local parsers = {
+    -- Default Parsers
+    "c", "lua", "markdown", "vimdoc",
+    -- Custom Parsers
+    "xml", "html", "css", "tsx", "typescript",
+    "bash", "python", "haskell", "go", "c_sharp",
+}
+
 -- Install Treesitter Parsers
-require("nvim-treesitter").install({ "c", "make", "bash", "html", "tsx", "typescript", "css", "python", "haskell", "xml",
-    "markdown", "go" })
+require("nvim-treesitter").install(parsers)
