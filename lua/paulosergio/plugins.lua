@@ -73,6 +73,7 @@ local plugins = {
         priority = 1000, -- make sure to load this before all the other plugins
         opts = {
             -- NOTE: you do not need to call setup if you don"t want to.
+            transparent = true,
             bold = false,
             italic = false,
         }
