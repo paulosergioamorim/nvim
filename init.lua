@@ -16,6 +16,7 @@ vim.o.swapfile = false
 vim.o.undofile = true
 vim.o.breakindent = true
 vim.o.confirm = true
+vim.o.scrolloff = 12
 
 -- Format and Quickfix
 vim.keymap.set("n", "<leader>f", vim.lsp.buf.format)
