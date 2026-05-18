@@ -3,7 +3,7 @@ local parsers = {
     "c", "lua", "markdown", "vimdoc",
     -- Custom Parsers
     "xml", "html", "css", "tsx", "typescript",
-    "bash", "python", "haskell", "go", "c_sharp",
+    "bash", "python", "haskell", "go"
 }
 
 -- Install Treesitter Parsers

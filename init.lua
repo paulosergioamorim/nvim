@@ -54,7 +54,7 @@ vim.cmd("packadd nvim.difftool")
 vim.cmd("packadd nvim.undotree")
 
 -- Enable LSP
-vim.lsp.enable({ "lua_ls", "clangd", "ts_ls", "pyright", "roslyn_ls", "jdtls", "gopls" })
+vim.lsp.enable({ "lua_ls", "clangd", "ts_ls", "pyright", "gopls" })
 
 -- Autocommands
 vim.api.nvim_create_autocmd("TextYankPost", {
@@ -63,6 +63,11 @@ vim.api.nvim_create_autocmd("TextYankPost", {
     callback = function()
         vim.highlight.on_yank()
     end,
+})
+
+vim.api.nvim_create_autocmd({ "BufNewFile", "BufRead" }, {
+    pattern = "*.h",
+    command = "set filetype=c",
 })
 
 vim.api.nvim_create_autocmd("FileType", {
