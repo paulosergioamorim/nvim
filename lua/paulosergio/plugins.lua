@@ -65,7 +65,11 @@ local plugins = {
             -- optional but recommended
             { "nvim-telescope/telescope-fzf-native.nvim", build = "make" },
         },
-        opts = {}
+        opts = {
+            defaults = {
+                file_ignore_patterns = { "obj" }
+            }
+        }
     },
     {
         "vague-theme/vague.nvim",
